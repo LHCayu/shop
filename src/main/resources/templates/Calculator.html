@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/4.2.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <link rel="stylesheet" href="../static/css/style.default.css" id="theme-stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var editValue;
+            $("#rs").click(function () {
+                $("input").val("");
+            });
+            $("#energy").click(function () {
+                $("#hiddenUpdate").click();
+            });
+            $("#editDetermine").click(function () {
+                var d,z,x,sum;
+                d=$("#editUser").val();
+                z=$("#editPhone").val();
+                x=$("#editAddress").val();
+                sum = d * 10000 + z * 5020 + x * 500;
+                alert(parseInt(sum/1000)+","+sum%1000);
+            });
+            var time = $("#time").text();
+            if (time != 0) {
+                alert(time)
+            }
+        })
+    </script>
+</head>
+<b id="time" th:if="${timeSum} ne null" th:text="${timeSum}" hidden></b>
+<body style="text-align: center">
+<div class="page login-page">
+    <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+            <div class="row">
+                <!-- Logo & Information Panel-->
+                <div class="col-lg-5">
+                    <div class="info d-flex align-items-center">
+                        <div class="content">
+                            <div class="logo">
+                                <h1>不思议迷宫</h1>
+                            </div>
+                            <p>加速器计算</p>
+                            <p id="energy">能源计算</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Form Panel    -->
+                <div class="col-lg-7 bg-white">
+                    <form id="rgt" method="post" action="/jsqCalculate" class="form d-flex align-items-center">
+                        <div class="content">
+                            <div class="form-group">
+                                <input class="input-material" type="number" name="h8" placeholder="8h">
+                            </div>
+                            <div class="form-group">
+                                <input class="input-material" type="number" name="h3" placeholder="3h"   >
+                            </div>
+                            <div class="form-group">
+                                <input class="input-material" type="number" name="m60" placeholder="60m" >
+                            </div>
+                            <div class="form-group">
+                                <input class="input-material" type="number" name="m30" placeholder="30m"   >
+                            </div>
+                            <div class="form-group">
+                                <input class="input-material" type="number" name="m15" placeholder="15m" >
+                            </div>
+                            <div class="form-group">
+                                <input class="input-material" type="number" name="m10" placeholder="10m"   >
+                            </div>
+                            <div class="form-group">
+                                <input class="input-material" type="number" name="m5" placeholder="5m" >
+                            </div>
+                            <div class="form-group">
+                                <input class="input-material" type="number" name="m1" placeholder="1m"   >
+                            </div>
+
+                            <span class="form-group">
+                                <button id="sb" type="submit" name="registerSubmit" class="btn btn-primary">计算</button>
+                            </span>
+                            <span class="form-group">
+                                <button id="rs" type="reset" name="registerSubmit" class="btn btn-primary">重置</button>
+                            </span>
+                            <p></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<button id="hiddenUpdate" data-toggle="modal" data-target="#editModal" hidden> </button>
+<div class="modal fade" id="editModal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">计算能源</h4>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+            </div>
+            <div class="modal-body">大(10k)：<input id="editUser" type="number" value="0"/></div>
+            <div class="modal-body">中(5k)：<input id="editPhone" type="number" value="0"/></div>
+            <div class="modal-body">小(0.5k)：<input id="editAddress" type="number" value="0"/></div>
+            <div class="modal-footer">
+                <button id="editDetermine" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+                <button type="button" class="btn secondary"  data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
